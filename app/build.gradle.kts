@@ -1,9 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("maven-publish")
 }
 
 android {
@@ -17,7 +14,7 @@ android {
         minSdk = 29
         targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0."
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

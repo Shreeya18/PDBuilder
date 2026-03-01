@@ -7,7 +7,6 @@ plugins {
 android {
     namespace = "com.tasha.pdfbuilder"
     compileSdk {
-
         version = release(36)
     }
 

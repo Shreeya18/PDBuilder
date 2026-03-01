@@ -41,7 +41,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.Shreeya18"
                 artifactId = "PDFBuilder"
-                version = "1.0.2"
+                version = "1.0.3"
             }
         }
     }

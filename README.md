@@ -1,8 +1,13 @@
-# PDFBuilder 📄
+[PDFBuilder Documentation.pdf](https://github.com/user-attachments/files/25677970/PDFBuilder.Documentation.pdf)# PDFBuilder 📄
 
 A simple Android library to generate consistent, professional PDF files from Kotlin code. Works identically on all Android devices — phones, tablets, and emulators.
 
 ---
+For full usage details refer doc - 
+
+[PDFBuilder Documentation.pdf](https://github.com/user-attachments/files/25677971/PDFBuilder.Documentation.pdf)
+
+
 
 ## Installation
 
@@ -124,6 +129,7 @@ FileOutputStream(file).use { pdf.buildToStream(it) }
 - Kotlin
 
 ---
+
 
 ## License
 

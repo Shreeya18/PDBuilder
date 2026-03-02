@@ -60,8 +60,24 @@ class PDFBuilder(
 
     fun bulletList(items: List<String>) = apply { elements += PDFElement.BulletList(items) }
 
-    fun tableRow(cells: List<String>, isHeader: Boolean = false, columnWeights: List<Float>? = null) = apply {
-        elements += PDFElement.TableRow(cells, isHeader, columnWeights)
+    fun tableRow(
+        cells: List<String>,
+        isHeader: Boolean = false,
+        columnWeights: List<Float>? = null,
+        headerBgColor: Int = 0xFFEEEEEE.toInt(),
+        borderColor: Int = 0xFFCCCCCC.toInt(),
+        textColor: Int = 0xFF000000.toInt(),
+        cellBgColor: Int = 0xFFFFFFFF.toInt()
+    ) = apply {
+        elements += PDFElement.TableRow(
+            cells = cells,
+            isHeader = isHeader,
+            columnWeights = columnWeights,
+            headerBgColor = headerBgColor,
+            borderColor = borderColor,
+            textColor = textColor,
+            cellBgColor = cellBgColor
+        )
     }
 
     fun image(bitmap: android.graphics.Bitmap, maxHeightPt: Float = 300f, caption: String? = null) = apply {

@@ -36,7 +36,7 @@ val pdf = PDFBuilder(pageSize = PDFPageSize.A4)
     .body("This is the first paragraph of my report.")
     .spacer()
     .tableRow(listOf("Item", "Price"), isHeader = true)
-    .tableRow(listOf("Consulting Fee", "₹250"))
+    .tableRow(listOf("Item Charges", "₹250"))
     .divider()
 
 val file = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "report.pdf")

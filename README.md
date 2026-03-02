@@ -105,17 +105,17 @@ val pdf = PDFBuilder(
     pageSize = PDFPageSize.A4,
     margins = PDFMargins(top = 72f, bottom = 72f, left = 72f, right = 72f),
     showPageNumbers = false,
-    header = "Shalini Clinic"
+    header = "Noman's Company"
 )
     .title("Invoice", level = 2)
     .spacer(8f)
-    .body("Billed to: Ms. Amira Shah", bold = true)
+    .body("Billed to: Mr. Aditya Shah", bold = true)
     .body("Date: 23 Feb 2026")
     .divider()
     .tableRow(listOf("Description", "Amount"), isHeader = true, columnWeights = listOf(3f, 1f))
-    .tableRow(listOf("Consulting Fee", "₹250"), columnWeights = listOf(3f, 1f))
-    .tableRow(listOf("Medicine", "₹3690"), columnWeights = listOf(3f, 1f))
-    .tableRow(listOf("Total", "₹3940"), isHeader = true, columnWeights = listOf(3f, 1f))
+    .tableRow(listOf("White Sneakers 21S", "₹9999"), columnWeights = listOf(3f, 1f))
+    .tableRow(listOf("Hallman's Tiko Digital Watch", "₹3690"), columnWeights = listOf(3f, 1f))
+    .tableRow(listOf("Total", "₹13689"), isHeader = true, columnWeights = listOf(3f, 1f))
 
 val file = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "invoice.pdf")
 FileOutputStream(file).use { pdf.buildToStream(it) }

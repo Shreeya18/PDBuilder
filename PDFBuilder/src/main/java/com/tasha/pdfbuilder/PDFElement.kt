@@ -110,13 +110,18 @@ sealed class PDFElement {
     data class TableRow(
         val cells: List<String>,
         val isHeader: Boolean = false,
-        val columnWeights: List<Float>? = null  // null = equal columns
+        val columnWeights: List<Float>? = null,
+        val headerBgColor: Int = 0xFFEEEEEE.toInt(),
+        val borderColor: Int = 0xFFCCCCCC.toInt(),
+        val textColor: Int = 0xFF000000.toInt(),
+        val cellBgColor: Int = 0xFFFFFFFF.toInt()
     ) : PDFElement() {
 
         private fun paint(isHeader: Boolean) = Paint().apply {
             isAntiAlias = true
             typeface = if (isHeader) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
             textSize = if (isHeader) 11f else 10f
+            color = textColor
         }
 
         private fun columnWidths(availableWidth: Float): List<Float> {
@@ -141,21 +146,21 @@ sealed class PDFElement {
             val padding = 8f
             val rowHeight = measure(availableWidth, painter)
 
-            // Background for header
-            if (isHeader) {
-                val bgPaint = Paint().apply { color = 0xFFEEEEEE.toInt() }
-                painter.canvas.drawRect(x, y, x + availableWidth, y + rowHeight, bgPaint)
+            val bgPaint = Paint().apply {
+                color = if (isHeader) headerBgColor else cellBgColor
             }
+            painter.canvas.drawRect(x, y, x + availableWidth, y + rowHeight, bgPaint)
 
-            // Row border
-            val borderPaint = Paint().apply { color = 0xFFCCCCCC.toInt(); style = Paint.Style.STROKE; strokeWidth = 0.5f }
+            val borderPaint = Paint().apply {
+                color = borderColor
+                style = Paint.Style.STROKE
+                strokeWidth = 0.5f
+            }
             painter.canvas.drawRect(x, y, x + availableWidth, y + rowHeight, borderPaint)
 
-            // Cells
             var cellX = x
             cells.forEachIndexed { i, text ->
                 val cellW = widths[i]
-                // Vertical separator
                 if (i > 0) painter.canvas.drawLine(cellX, y, cellX, y + rowHeight, borderPaint)
 
                 val lines = painter.breakTextIntoLines(text, p, cellW - padding * 2)

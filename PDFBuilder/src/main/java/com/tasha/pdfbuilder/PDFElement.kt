@@ -52,6 +52,39 @@ sealed class PDFElement {
         }
     }
 
+    data class HeaderRow(
+        val leftContent: List<PDFElement>,
+        val rightContent: List<PDFElement>,
+        val leftWeight: Float = 2f,
+        val rightWeight: Float = 1f
+    ) : PDFElement() {
+
+        override fun measure(availableWidth: Float, painter: PDFPainter): Float {
+            val leftWidth = availableWidth * (leftWeight / (leftWeight + rightWeight))
+            val rightWidth = availableWidth * (rightWeight / (leftWeight + rightWeight))
+            val leftHeight = leftContent.sumOf { it.measure(leftWidth, painter).toDouble() }.toFloat()
+            val rightHeight = rightContent.sumOf { it.measure(rightWidth, painter).toDouble() }.toFloat()
+            return maxOf(leftHeight, rightHeight)
+        }
+
+        override fun draw(x: Float, y: Float, availableWidth: Float, painter: PDFPainter) {
+            val leftWidth = availableWidth * (leftWeight / (leftWeight + rightWeight))
+            val rightWidth = availableWidth * (rightWeight / (leftWeight + rightWeight))
+            val rightX = x + leftWidth
+
+            var leftY = y
+            leftContent.forEach { element ->
+                element.draw(x, leftY, leftWidth, painter)
+                leftY += element.measure(leftWidth, painter)
+            }
+
+            var rightY = y
+            rightContent.forEach { element ->
+                element.draw(rightX, rightY, rightWidth, painter)
+                rightY += element.measure(rightWidth, painter)
+            }
+        }
+    }
     data class Body(
         val text: String,
         val bold: Boolean = false,

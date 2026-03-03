@@ -60,6 +60,15 @@ class PDFBuilder(
 
     fun bulletList(items: List<String>) = apply { elements += PDFElement.BulletList(items) }
 
+    fun headerRow(
+        leftContent: List<PDFElement>,
+        rightContent: List<PDFElement>,
+        leftWeight: Float = 2f,
+        rightWeight: Float = 1f
+    ) = apply {
+        elements += PDFElement.HeaderRow(leftContent, rightContent, leftWeight, rightWeight)
+    }
+
     fun tableRow(
         cells: List<String>,
         isHeader: Boolean = false,
